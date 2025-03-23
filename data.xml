@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HealthcareProvider 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="healthcare_provider.xsd"
+    providerID="HCP001"
+    licenseNumber="LIC-1234">
+
+    <FacilityName>CityCare Hospital</FacilityName>
+
+    <Location>
+        <Address>456 Wellness Blvd</Address>
+        <City>Healthtown</City>
+        <State>NY</State>
+        <Zip>10001</Zip>
+    </Location>
+
+    <Departments>
+        <Department deptCode="CARD">
+            <Name>Cardiology</Name>
+            <Floor>3</Floor>
+            <PhoneExtension>3101</PhoneExtension>
+        </Department>
+        <Department deptCode="PED">
+            <Name>Pediatrics</Name>
+            <Floor>2</Floor>
+            <PhoneExtension>2202</PhoneExtension>
+        </Department>
+    </Departments>
+
+    <Doctors>
+        <Doctor doctorID="D001" active="true">
+            <FirstName>Sarah</FirstName>
+            <LastName>Nguyen</LastName>
+            <Specialization>Cardiologist</Specialization>
+            <LicenseNumber>LIC-4567</LicenseNumber>
+            <Shift>Morning</Shift>
+        </Doctor>
+        <Doctor doctorID="D002" active="true">
+            <FirstName>James</FirstName>
+            <LastName>Lee</LastName>
+            <Specialization>Pediatrician</Specialization>
+            <LicenseNumber>LIC-7890</LicenseNumber>
+            <Shift>Afternoon</Shift>
+        </Doctor>
+    </Doctors>
+
+    <Patients>
+        <Patient patientID="P001">
+            <FullName>Emily Davis</FullName>
+            <Gender>Female</Gender>
+            <DOB>1985-06-10</DOB>
+            <InsuranceID>12345678</InsuranceID>
+        </Patient>
+        <Patient patientID="P002">
+            <FullName>Liam Smith</FullName>
+            <Gender>Male</Gender>
+            <DOB>1992-12-25</DOB>
+            <InsuranceID>87654321</InsuranceID>
+        </Patient>
+    </Patients>
+
+    <Appointments>
+        <Appointment apptID="A001">
+            <PatientID>P001</PatientID>
+            <DoctorID>D001</DoctorID>
+            <Date>2025-03-21</Date>
+            <Time>10:00:00</Time>
+            <Purpose>Heart check-up</Purpose>
+        </Appointment>
+        <Appointment apptID="A002">
+            <PatientID>P002</PatientID>
+            <DoctorID>D002</DoctorID>
+            <Date>2025-03-22</Date>
+            <Time>14:30:00</Time>
+            <Purpose>Annual pediatric exam</Purpose>
+        </Appointment>
+    </Appointments>
+
+    <Treatments>
+        <Treatment status="Completed">
+            <TreatmentID>T001</TreatmentID>
+            <PatientID>P001</PatientID>
+            <DoctorID>D001</DoctorID>
+            <Description>Prescribed blood pressure meds</Description>
+            <Date>2025-03-21</Date>
+        </Treatment>
+    </Treatments>
+
+    <Pharmacy>
+        <Medication medID="M001" prescriptionRequired="true">
+            <MedName>Atenolol</MedName>
+            <Dosage>50mg</Dosage>
+            <Stock>120</Stock>
+        </Medication>
+    </Pharmacy>
+
+    <LabTests>
+        <LabTest testID="L001">
+            <TestName>Cholesterol Panel</TestName>
+            <PatientID>P001</PatientID>
+            <Date>2025-03-21</Date>
+            <Result>Normal</Result>
+        </LabTest>
+    </LabTests>
+
+    <EmergencyServices>
+        <ContactNumber>911</ContactNumber>
+        <AmbulanceAvailable>true</AmbulanceAvailable>
+    </EmergencyServices>
+</HealthcareProvider>
