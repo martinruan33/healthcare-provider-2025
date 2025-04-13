@@ -1,0 +1,98 @@
+header {
+    background: #003366;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    padding: 10px 20px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  nav ul {
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav a, footer a {
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  main {
+    padding: 30px 20px;
+  }
+  
+  h2, h3 {
+      text-align: center;
+  }
+  
+  h2 {
+    font-size: 2em;
+    color: #003366;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #007bff;
+    margin: 8px auto 0;
+  }
+  
+  .card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card.blue {
+    background: #007bff;
+    color: #fff;
+  }
+  
+  .icon {
+      width: 20px;
+      height: 20px;
+  }
+  
+  table {
+    border-spacing: 10px;
+  }
+  
+  address {
+    font-style: normal;
+    line-height: 1.6;
+  }
+  
+  footer {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  #departments a {
+    color: black;
+  }
+  
+  a:hover, #departments a:hover {
+    color: #1977cc;
+    cursor: pointer;
+  }
+  
