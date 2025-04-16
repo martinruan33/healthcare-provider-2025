@@ -19,11 +19,34 @@
             <Name>Cardiology</Name>
             <Floor>3</Floor>
             <PhoneExtension>3101</PhoneExtension>
+            <Staff>
+                <StaffMember staffID="S001">
+                    <Name>Anna Brown</Name>
+                    <Role>Nurse</Role>
+                </StaffMember>
+            </Staff>
         </Department>
         <Department deptCode="PED">
             <Name>Pediatrics</Name>
             <Floor>2</Floor>
             <PhoneExtension>2202</PhoneExtension>
+            <Staff>
+                <StaffMember staffID="S002">
+                    <Name>Michael Green</Name>
+                    <Role>Receptionist</Role>
+                </StaffMember>
+            </Staff>
+        </Department>
+        <Department deptCode="RAD">
+            <Name>Radiology</Name>
+            <Floor>1</Floor>
+            <PhoneExtension>1103</PhoneExtension>
+            <Staff>
+                <StaffMember staffID="S003">
+                    <Name>Linda White</Name>
+                    <Role>Technician</Role>
+                </StaffMember>
+            </Staff>
         </Department>
     </Departments>
 
@@ -42,6 +65,13 @@
             <LicenseNumber>LIC-7890</LicenseNumber>
             <Shift>Afternoon</Shift>
         </Doctor>
+        <Doctor doctorID="D003" active="false">
+            <FirstName>Priya</FirstName>
+            <LastName>Patel</LastName>
+            <Specialization>Radiologist</Specialization>
+            <LicenseNumber>LIC-2345</LicenseNumber>
+            <Shift>Night</Shift>
+        </Doctor>
     </Doctors>
 
     <Patients>
@@ -50,12 +80,45 @@
             <Gender>Female</Gender>
             <DOB>1985-06-10</DOB>
             <InsuranceID>12345678</InsuranceID>
+            <Contacts>
+                <Contact type="Emergency">
+                    <Name>John Davis</Name>
+                    <Phone>555-1234</Phone>
+                </Contact>
+            </Contacts>
+            <MedicalHistory>
+                <Condition>Hypertension</Condition>
+            </MedicalHistory>
         </Patient>
         <Patient patientID="P002">
             <FullName>Liam Smith</FullName>
             <Gender>Male</Gender>
             <DOB>1992-12-25</DOB>
             <InsuranceID>87654321</InsuranceID>
+            <Contacts>
+                <Contact type="Emergency">
+                    <Name>Mary Smith</Name>
+                    <Phone>555-5678</Phone>
+                </Contact>
+            </Contacts>
+            <MedicalHistory>
+                <Condition>Asthma</Condition>
+            </MedicalHistory>
+        </Patient>
+        <Patient patientID="P003">
+            <FullName>Olivia Chen</FullName>
+            <Gender>Female</Gender>
+            <DOB>2000-08-15</DOB>
+            <InsuranceID>11223344</InsuranceID>
+            <Contacts>
+                <Contact type="Emergency">
+                    <Name>Wei Chen</Name>
+                    <Phone>555-8765</Phone>
+                </Contact>
+            </Contacts>
+            <MedicalHistory>
+                <Condition>None</Condition>
+            </MedicalHistory>
         </Patient>
     </Patients>
 
@@ -74,6 +137,13 @@
             <Time>14:30:00</Time>
             <Purpose>Annual pediatric exam</Purpose>
         </Appointment>
+        <Appointment apptID="A003">
+            <PatientID>P003</PatientID>
+            <DoctorID>D003</DoctorID>
+            <Date>2025-03-23</Date>
+            <Time>09:00:00</Time>
+            <Purpose>X-ray</Purpose>
+        </Appointment>
     </Appointments>
 
     <Treatments>
@@ -84,6 +154,13 @@
             <Description>Prescribed blood pressure meds</Description>
             <Date>2025-03-21</Date>
         </Treatment>
+        <Treatment status="Ongoing">
+            <TreatmentID>T002</TreatmentID>
+            <PatientID>P002</PatientID>
+            <DoctorID>D002</DoctorID>
+            <Description>Asthma management</Description>
+            <Date>2025-03-22</Date>
+        </Treatment>
     </Treatments>
 
     <Pharmacy>
@@ -91,6 +168,11 @@
             <MedName>Atenolol</MedName>
             <Dosage>50mg</Dosage>
             <Stock>120</Stock>
+        </Medication>
+        <Medication medID="M002" prescriptionRequired="false">
+            <MedName>Paracetamol</MedName>
+            <Dosage>500mg</Dosage>
+            <Stock>300</Stock>
         </Medication>
     </Pharmacy>
 
@@ -100,6 +182,12 @@
             <PatientID>P001</PatientID>
             <Date>2025-03-21</Date>
             <Result>Normal</Result>
+        </LabTest>
+        <LabTest testID="L002">
+            <TestName>Chest X-ray</TestName>
+            <PatientID>P003</PatientID>
+            <Date>2025-03-23</Date>
+            <Result>Clear</Result>
         </LabTest>
     </LabTests>
 

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- ===== Root Element ===== -->
+  <xs:element name="HealthcareProvider">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FacilityName" type="xs:string"/>
+        <xs:element name="Location" type="LocationType"/>
+        <xs:element name="Departments" type="DepartmentsType"/>
+        <xs:element name="Doctors" type="DoctorsType"/>
+        <xs:element name="Patients" type="PatientsType"/>
+        <xs:element name="Appointments" type="AppointmentsType"/>
+        <xs:element name="Treatments" type="TreatmentsType"/>
+        <xs:element name="Pharmacy" type="PharmacyType"/>
+        <xs:element name="LabTests" type="LabTestsType"/>
+        <xs:element name="EmergencyServices" type="EmergencyServicesType"/>
+      </xs:sequence>
+      <xs:attribute name="providerID" type="xs:ID" use="required"/>
+      <xs:attribute name="licenseNumber" type="LicenseType" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ===== Location Type ===== -->
+  <xs:complexType name="LocationType">
+    <xs:sequence>
+      <xs:element name="Address" type="xs:string"/>
+      <xs:element name="City" type="xs:string"/>
+      <xs:element name="State" type="StateCodeType"/>
+      <xs:element name="Zip" type="ZipCodeType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Custom Restriction 1: ZIP must be 5 digits -->
+  <xs:simpleType name="ZipCodeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{5}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Custom Restriction 2: State Code (2 letters) -->
+  <xs:simpleType name="StateCodeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ===== Departments ===== -->
+  <xs:complexType name="DepartmentsType">
+    <xs:sequence>
+      <xs:element name="Department" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Floor" type="FloorNumberType"/>
+            <xs:element name="PhoneExtension" type="ExtensionType"/>
+            <xs:element name="Staff" type="StaffType"/>
+          </xs:sequence>
+          <xs:attribute name="deptCode" type="DeptCodeType" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Custom Restriction 3: Department Code (4 letters) -->
+  <xs:simpleType name="DeptCodeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ===== Doctors ===== -->
+  <xs:complexType name="DoctorsType">
+    <xs:sequence>
+      <xs:element name="Doctor" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="FirstName" type="xs:string"/>
+            <xs:element name="LastName" type="xs:string"/>
+            <xs:element name="Specialization" type="xs:string"/>
+            <xs:element name="LicenseNumber" type="LicenseType"/>
+            <xs:element name="Shift" type="ShiftType"/>
+          </xs:sequence>
+          <xs:attribute name="doctorID" type="xs:ID" use="required"/>
+          <xs:attribute name="active" type="xs:boolean" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Custom Restriction 4: License format must be "LIC-XXXX" -->
+  <xs:simpleType name="LicenseType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="LIC-\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Custom Restriction 5: Shift must be Morning/Afternoon/Night -->
+  <xs:simpleType name="ShiftType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Morning"/>
+      <xs:enumeration value="Afternoon"/>
+      <xs:enumeration value="Night"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ===== Patients ===== -->
+  <xs:complexType name="PatientsType">
+    <xs:sequence>
+      <xs:element name="Patient" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="FullName" type="xs:string"/>
+            <xs:element name="Gender" type="GenderType"/>
+            <xs:element name="DOB" type="xs:date"/>
+            <xs:element name="InsuranceID" type="InsuranceType"/>
+            <xs:element name="MedicalHistory" type="MedicalHistoryType"/>
+          </xs:sequence>
+          <xs:attribute name="patientID" type="xs:ID" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Custom Restriction 6: Gender enumeration -->
+  <xs:simpleType name="GenderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male"/>
+      <xs:enumeration value="Female"/>
+      <xs:enumeration value="Other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Custom Restriction 7: Insurance ID must be 8-digit number -->
+  <xs:simpleType name="InsuranceType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{8}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ===== Appointments ===== -->
+  <xs:complexType name="AppointmentsType">
+    <xs:sequence>
+      <xs:element name="Appointment" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="PatientID" type="xs:IDREF"/>
+            <xs:element name="DoctorID" type="xs:IDREF"/>
+            <xs:element name="DateTime" type="xs:dateTime"/>
+            <xs:element name="Purpose" type="xs:string"/>
+            <xs:element name="Room" type="RoomNumberType"/>
+          </xs:sequence>
+          <xs:attribute name="apptID" type="xs:ID" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ===== Treatments ===== -->
+  <xs:complexType name="TreatmentsType">
+    <xs:sequence>
+      <xs:element name="Treatment" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="TreatmentID" type="xs:ID"/>
+            <xs:element name="PatientID" type="xs:IDREF"/>
+            <xs:element name="DoctorID" type="xs:IDREF"/>
+            <xs:element name="Description" type="xs:string"/>
+            <xs:element name="Date" type="xs:date"/>
+            <xs:element name="Medications" type="MedicationListType"/>
+          </xs:sequence>
+          <xs:attribute name="status" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="Scheduled"/>
+                <xs:enumeration value="In-Progress"/>
+                <xs:enumeration value="Completed"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ===== Pharmacy ===== -->
+  <xs:complexType name="PharmacyType">
+    <xs:sequence>
+      <xs:element name="Medication" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="MedName" type="xs:string"/>
+            <xs:element name="Dosage" type="DosageType"/>
+            <xs:element name="Stock" type="xs:positiveInteger"/>
+          </xs:sequence>
+          <xs:attribute name="medID" type="xs:ID" use="required"/>
+          <xs:attribute name="prescriptionRequired" type="xs:boolean" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ===== Lab Tests ===== -->
+  <xs:complexType name="LabTestsType">
+    <xs:sequence>
+      <xs:element name="LabTest" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="TestName" type="xs:string"/>
+            <xs:element name="PatientID" type="xs:IDREF"/>
+            <xs:element name="Date" type="xs:date"/>
+            <xs:element name="Result" type="xs:string"/>
+            <xs:element name="LabTechnician" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="testID" type="xs:ID" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ===== Emergency Services ===== -->
+  <xs:complexType name="EmergencyServicesType">
+    <xs:sequence>
+      <xs:element name="ContactNumber" type="PhoneNumberType"/>
+      <xs:element name="AmbulanceAvailable" type="xs:boolean"/>
+      <xs:element name="Helipad" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Additional Custom Types -->
+  <xs:simpleType name="FloorNumberType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ExtensionType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="x\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PhoneNumberType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\(\d{3}\) \d{3}-\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
